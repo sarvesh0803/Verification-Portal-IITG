@@ -1,0 +1,8 @@
+<form action="/portal/create_team/"  method="post" id="create_team" name="create_team">
+    {% csrf_token %}
+    <input type="text" placeholder="Event Name" name="team" id="team">
+    <input type="text" placeholder="Subtitle" name="subtitle" id="subtitle">
+    <input type="text" placeholder="Year" name="year" id="year">
+    <input type="text" placeholder="Under the aegis" name="under" id="under">
+    <input type="submit" value="Create Event" form="create_team">
+</form>

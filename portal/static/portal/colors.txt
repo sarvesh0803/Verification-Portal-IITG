@@ -1,0 +1,12 @@
+cbs - green 
+cult - blue grey 
+sports - grey 
+sab - red 
+sail - orange
+tech - amber
+welf - teal
+others - brown
+hostel teams -
+hab -
+dept bodies -
+swc - 

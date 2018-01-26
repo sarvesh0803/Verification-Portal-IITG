@@ -1,0 +1,41 @@
+<h1>Hello I m privilaged type2 user</h1>
+{{ webmail }}
+
+<form  method="post" action="{% url 'portal:logout' %}" name="logout" id="logout">
+    {% csrf_token %}
+    <button form="logout">Logout</button>
+</form>
+
+
+</form>
+
+
+<form  method="post" action="{% url 'portal:create_team_page' %}" name="create_page" id="create_page">
+    {% csrf_token %}
+    <button form="create_page">Create team</button>
+
+</form>
+
+
+
+
+<form  method="get" action="{% url 'portal:show_request_user2' %}" name="show_request2" id="show_request2">
+
+    <button form="show_request2">Post</button>
+
+</form>
+
+
+
+<form  method="get" action="{% url 'portal:pending' %}" name="pending" id="pending">
+    {% csrf_token %}
+    <button form="pending">See Pending Request</button>
+
+</form>
+
+
+<form  method="post" action="{% url 'portal:search_event_page' %}" name="apply_event" id="apply_event">
+    {% csrf_token %}
+    <button form="apply_event">Search for Event</button>
+
+</form>

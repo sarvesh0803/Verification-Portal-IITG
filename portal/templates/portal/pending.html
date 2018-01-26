@@ -1,0 +1,86 @@
+<h4>Pending Requests</h4>
+<ol>
+{% for x in obj %}
+
+
+    <li></li><p>Requested Post: {{ x.request_post }}</p>
+    <p>Event : {{ x.request_event }}</p>
+    <p>Year : {{ x.request_year }}</p>
+    {% if x.pending_at != "none" %}
+        <p>Pending At : {{ x.pending_at }}</p>
+    {% endif %}
+
+
+    {% for y in x.request_progress.all %}
+    {% if y.stage0 != "none" %}
+    <p>{{ y.stage0 }}</p>
+    {% endif %}
+    {% if y.stage1 != "none" %}
+    <p>{{ y.stage1 }}</p>
+    {% endif %}
+    {% if y.stage2 != "none" %}
+    <p>{{ y.stage2 }}</p>
+    {% endif %}
+    {% if y.stage3 != "none" %}
+    <p>{{ y.stage3 }}</p>
+    {% endif %}
+    {%  if y.stage4 != "none" %}
+    <p>{{ y.stage4 }}</p>
+    {% endif %}
+    {% endfor %}
+    {% if x.pending == True %}
+        <p>Status : Pending</p>
+    {% endif %}
+    {% if x.approved == True %}
+        <p>Status : Accepted</p>
+    {% endif %}
+    {% if x.rejected == True %}
+    <p>Status : Rejected</p>
+    {% endif %}
+{% endfor %}
+
+
+
+
+    {% for z in obj2 %}
+
+
+    <li></li><p> Team Name: {{ z.request_team.team_name }}</p>
+    <p>Year : {{ z.team_year }}</p>
+    {% if z.pending_at != "none" %}
+        <p>Pending At : {{ z.pending_at }}</p>
+    {% endif %}
+
+
+
+    {% for s in z.team_approval_progress.all %}
+        {% if s.stage0 != "none" %}
+            <p>{{ s.stage0 }}</p>
+        {% endif %}
+        {% if s.stage1 != "none" %}
+            <p>{{ s.stage1 }}</p>
+        {% endif %}
+        {% if s.stage2 != "none" %}
+            <p>{{ s.stage2 }}</p>
+        {% endif %}
+        {% if s.stage3 != "none" %}
+            <p>{{ s.stage3 }}</p>
+        {% endif %}
+    {% endfor %}
+
+    {% if z.pending == True %}
+        <p>Status : Pending</p>
+    {% endif %}
+    {% if z.approved == True %}
+        <p>Status : Accepted</p>
+    {% endif %}
+    {% if z.rejected == True%}
+    <p>Status : Rejected</p>
+    {% endif %}
+{% endfor %}
+
+
+
+
+
+</ol>

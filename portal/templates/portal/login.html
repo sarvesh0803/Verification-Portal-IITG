@@ -1,0 +1,6 @@
+ <form action="{% url 'portal:login' %}" method="post" id="login" name="login">
+                         {% csrf_token %}
+                        <input type="text"  placeholder="webmail" id="webmail" name="webmail"><br><br>
+						<input type="password"  placeholder="password" id="password" name="password"><br><br>
+                        <input type="submit" value="Login" form="login">
+					</form>

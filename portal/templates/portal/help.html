@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Help | Verification Portal</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    
+    <link href="css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="{% static 'portal/sidebar-1.jpg' %}">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    Verification Portal
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="{% url 'portal:pending' %}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'portal:search_event_page' %}">
+                            <i class="material-icons">search</i>
+                            <p>Search</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'portal:create_team_page' %}">
+                            <i class="material-icons">create</i>
+                            <p>Create</p>
+                        </a>
+                    </li>                    
+                    <li>
+                        <a href="user.html">
+                            <i class="material-icons">person</i>
+                            <p>Profile</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="help.html">
+                            <i class="material-icons">help</i>
+                            <p>Help</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="{% url 'portal:logout' %}">
+                            <i class="material-icons">settings_power</i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"> Help </a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <h4 class="nav navbar-nav navbar-right">Welcome, <strong><span class="mkv_user">{{ user }}</span>!</strong></h4>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">
+                <div class="container-fluid text-justify">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h3>Hi there!</h3>
+                            <p>Welcome to the help section. This section has been designed to give you a detailed walk-through of the portal and also to help solve any problem you might face while using it.</p>
+                            <p>To get started check out the list of contents <span class="hidden-xs">to your right</span><span class="hidden-sm hidden-md hidden-lg">below</span>. Thereon, you can navigate to the section where you believe your query fits best. Have a question? Check out the <a href="#faqs">Frequently Asked Questions (FAQs)</a>. If you still can't find an answer, feel free to contact us: 
+                                <ul class="list-unstyled">
+                                    <li>Sarvesh Raj - Message on <a href="https://www.facebook.com/sarvesh83">Facebook</a> or drop an email at s.barnwal@iitg.ernet.in</li>
+                                    <li>Mukul Verma - Message on <a href="https://www.facebook.com/mukul.verma.3745">Facebook</a> or drop an email at mkv_1998@iitg.ernet.in</li>
+                                </ul></p>
+                            <p>For your convenience, we have also included a <a href="#contacts">contacts</a> section where you'll find the contact details of every person with a position of responsibility who lies in the domain of this portal.</p>
+                            <p>Last but not the least, please don't forget to give <a href="#feedback">feedback</a>. The portal is still under development and we would love to hear your suggestions or ideas. Tell us how you feel about the design or submit a bug; it's upto you. <br>Thanks a lot! :)</p>
+                        </div>
+                        <div class="col-sm-2 text-left">
+                            <h3>Contents</h3>
+                            <ul class="list-unstyled">
+                                <li><a href="#introduction">Introduction</a></li>
+                                <li><a href="#layout">Layout of the portal</a></li>
+                                <li><a href="#search">Searching for a team</a></li>
+                                <li><a href="#apply">Applying for a post</a></li>
+                                <!-- creating a team -->
+                                <li><a href="#create">Creating a team</a></li>
+                                <li><a href="#track">Tracking your applications</a></li>
+                                <li><a href="#profile">Editing your profile</a></li>
+                                <li><a href="#faqs">FAQs</a></li>
+                                <!-- All secretaries -->
+                                <li><a href="#contacts">Contacts</a></li>
+                                <li><a href="#feedback">Feedback</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" id="introduction">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">Introduction</h3>
+                            <p>The verification portal has been made for one purpose: to get all your achievements and participation in any actitivity in your college life easily verified through a secure channel. Your profile URL in this portal is public; can be shared and put on your resume.</p>
+                            <p>To get your posts or achievements verified, you first need to search for the team you wish to apply in. Click apply, fill in your post name and hit submit. That's it!</p> 
+                        </div>
+                    </div>
+                    <div class="row" id="layout">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">Layout of the portal</h3>
+                            <p>The portal has been divided into five tabs <!-- sidebar tabs -->(only see <a href="#faq2">four</a>?), each of which is accessible from the sidebar <span class="hidden-xs hidden-sm">to your left</span><span class="hidden-lg hidden-md">by clicking the hamburger menu on the top right of the page</span>. The logout button is on the bottom of the sidebar. Clicking on the tab name takes you to it's page. Each page has been explained below.</p><p>Though the portal is responsive, we recommend using it on screens greater than 992px wide.</p>
+                        </div>   
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4>Dashboard</h4>
+                            <p>The dashboard is the page you should see everytime you login and is where you can check the status of all your applications. It has been divided into four sections <!-- dashboard tabs -->(only see <a href="">three</a>?) accessible from the navigation bar on top.</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>Search</h4>
+                            <p>The search page is where you find teams and apply in them. You should see a familiar search bar with a handy quick instructions panel.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- create page -->
+                        <div class="col-sm-4">
+                            <h4>Create</h4>
+                            <p>This page is basically a form which can be used to create new teams.</p><p>This page has restricted access and only people with positions of responsibility can use it.</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Profile</h4>
+                            <p>The profile page shows all your approved posts. You can also edit your name here.</p><p>This page is public and the URL can be shared.</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Help</h4>
+                            <p class="If you are reading this, you should help us.">If you are reading this, you have already reached the Help page. Well done ;)</p>
+                        </div>
+                    </div>
+                    <div class="row" id="search">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">Searching for a team</h3>
+                            <p>Click on the Search button on the sidebar. Type your keyword in the search bar and the results should immediately pop up. You can search by Team name or it's subtitle. Each search result will have the team name, subtitle, logo, year and team creator to help you find the right team.</p>
+                            <p><a href="#faq1">Can't find your team?</a></p>
+                        </div>
+                    </div>
+                    <div class="row" id="apply">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">Applying for a post</h3>
+                            <p>After having found the team you want to apply in, click on Apply at the bottom right of the card. You should see a popup with the team details and an input field. Type in the post name you want to apply for and click on Submit. You can now track your application in the Dashboard.</p>
+                            <p>For now we are only permitting applying in a team of the current academic year.</p>
+                            <ul class="list-unstyled">
+                                <li><strong>Double check</strong> the team details you are applying in.</li>
+                                <li><strong>Do not</strong> apply for multiple posts in one request. Make a new request for each post.</li>
+                                <li><strong>Make sure</strong> the post name is properly formatted as this will be the official proof for every achievement.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- creating a team -->
+                    <div class="row" id="create">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">Creating a team</h3>
+                            <p><strong>Definition of a team:</strong> Any planned occasion or any annual team of any body/club/occasion.</p>
+                            <p>Click on the Create button (don't see the <a href="#faq2">button</a>?) on the sidebar. The create page is a form. To create a new team you have to fill the form with your team details. The team name (e.g. Alcheringa), subtitle (e.g. The Annual Cultural Festival), year (e.g. 2017-2018), under the aegis of (e.g. Cultural Board) are the four fields to be filled.</p>
+                            <p>After submitting the team details, your request can be tracked in the Dashboard.</p>
+                            <p>There will be multiple teams of the same body. For example, there will be multiple ‘teams’ of ‘Cepstrum, The Student Body of EEE’ distinguished by their academic year ‘under the aegis’ of ‘Departmental Body: Cepstrum’. This will allow for creation of annual teams of fixed bodies which work around the year. Similarly, there will be multiple ‘teams’ of ‘Octaves, The Music Club’ distinguished by their year ‘under the aegis’ of ‘Cultural Board’.</p>
+                            <p>More examples:</p>
+                            <table class="table table-hover">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th>Team name</th>
+                                        <th>Year</th>
+                                        <th>Under the aegis</th>
+                                        <th>Created by (webmail)</th>
+                                        <th>Applicants</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Cultural Board</td>
+                                        <td>2016-2017</td>
+                                        <td>Cultural Board</td>
+                                        <td>cultsec</td>
+                                        <td>All secretaries of cultural board of the year 2016-2017.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cultural Board</td>
+                                        <td>2015-2016</td>
+                                        <td>Cultural Board</td>
+                                        <td>cultsec</td>
+                                        <td>All secretaries of cultural board of the year 2015-2016.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chalchitra</td>
+                                        <td>2017-2018</td>
+                                        <td>Cultural Board</td>
+                                        <td>j.prakhar</td>
+                                        <td>Every person who worked in Chalchitra 2017-2018.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Verification Portal</td>
+                                        <td>2017-2018</td>
+                                        <td>Others</td>
+                                        <td>vp</td>
+                                        <td>Every person who worked in developing the Verification Portal.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Barak Kriti</td>
+                                        <td>2016-2017</td>
+                                        <td>Hostel Teams: Barak</td>
+                                        <td>gensec.barak</td>
+                                        <td>Every person who has worked in Kriti 2016-2017 for Barak Hostel.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Barak HMC</td>
+                                        <td>2017-2018</td>
+                                        <td>HAB</td>
+                                        <td>gensec.barak</td>
+                                        <td>All secretaries in HMC 2017-2018 of Barak Hostel.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Techniche</td>
+                                        <td>2017-2018</td>
+                                        <td>Technical Board</td>
+                                        <td>purvish.shah</td>
+                                        <td>Every team member of Techniche 2017-2018</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="list-unstyled">
+                                <li><strong>Limit</strong> your team name to __ characters.</li>
+                                <li><strong>Limit</strong> your team subtitle to __ characters.</li>
+                                <li><strong>Take care</strong> of proper formatting as teams approved become official.</li>
+                                <li><strong>Check</strong> for existing teams before creating a new one. Don't create duplicates.</li>
+                                <li></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="row" id="track">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">Tracking your applications</h3>
+                            <p>All your applications (team or post) can be tracked in the Dashboard. Each application card will have the team name, post name, team creator, team year, and body.</p><p>The pending tab shows all your requests that are in progress. Hovering over the progress bar shows more details.<br>The approved tab shows all your posts and teams that been approved. Teams and posts will be split into two sections.<br>The declined tab shows all your requests that have been declined with the person who declined your request and the reason for declination.</p>
+                            <!-- request tab -->
+                            <p>The request tab is where you can approve or decline the requests that have come to you. You cannot decline a request without giving a reason.</p>
+                        </div>
+                    </div>
+                    <div class="row" id="profile">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">Editing your profile</h3>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="row" id="faqs">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">Frequently Asked Questions</h3>
+                            <ul>
+                                <li id="faq1">
+                                    <h4 class="text-default" style="margin-bottom: 5px;">I can't find my team. What should I do?</h4>
+                                    <p>That is probably because it has not been made yet. <a href="#contacts">Contact</a> your secretary and ask him to create one.</p>
+                                </li>
+                                <li id="faq2">
+                                    <h4 class="text-default" style="margin-bottom: 5px;">Why can't I create a team?</h4>
+                                    <p>Some rights in the portal have been reserved for people with positions of responsibility. You can <a href="#contacts">contact</a> them to create a team if need be.</p>
+                                </li>
+                                <li id="faq3">
+                                    <h4 class="text-default" style="margin-bottom: 5px;">My request is not moving past the first stage. What should I do?</h4>
+                                    <p>Please check whether the team you applied in is of the current academic year. For now, we are only permitting requests of the current academic year.</p>
+                                </li>
+                                <li id="faq4">
+                                    <h4 class="text-default" style="margin-bottom: 5px;">My request is of the current year and is still not showing any progress. What should I do?</h4>
+                                    <p>Hover over the progress bar to know where the request is pending. You can then <a href="#contacts">contact</a> the concerned person.</p>
+                                </li>
+                            </ul>                            
+                        </div>
+                    </div>
+                    <div class="row" id="contacts">
+                        <h3 class="text-center">Contacts</h3>
+                        <div class="col-sm-4">
+                            <h4>Vice President: vp</h4>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Dean of Students' Affairs: dos</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4>Cultural Board</h4>
+                            <ul class="list-unstyled">
+                                <li>Chairman: chrcult</li>
+                                <li>General Secretary: cultsec</li>
+                                <li>Anchorenza: sarthak25</li>
+                                <li>RadioG: dhar.anshuman</li>
+                                <li>Dance Club: vinit.garg</li>
+                                <li>Drama Club: nikhil.kumar</li>
+                                <li>Fine Arts Club: tajanyamohan</li>
+                                <li>Literary and Debate Society: vishak.r</li>
+                                <li>Movie Club: j.prakhar</li>
+                                <li>Music: sushant.tyagi</li>
+                                <li>Photography: abhjain.2015</li>
+                                <li>Publications Sub Committee: shradha</li>
+                                <li>Alcheringa Convener:</li>
+                                <li>PAF Convener:</li>
+                                <li>Advaya Convener:</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Technical Board</h4>
+                            <ul class="list-unstyled">
+                                <li>Chairman: chrtech</li>
+                                <li>General Secretary: techsec</li>
+                                <li>Aeromodelling Club: prashant.gautam</li>
+                                <li>Astronomy Club: ashu.sharma</li>
+                                <li>Coding Club: katta.mouli | arpit.mathur</li>
+                                <li>Electronics Club: rahulkumar.2015</li>
+                                <li>E-Cell: devatha</li>
+                                <li>Robotics Club: afzal</li>
+                                <li>Automobile Club: a.mandloi</li>
+                                <li>Quiz Club: aditya.parashar</li>
+                                <li>Finance and Economics Club:  vaibhav.sable</li>
+                                <li>Prakriti Club: rupal.saxena</li>
+                                <li>Consulting and Analytics Club: karani</li>
+                                <li>Techniche Convener: purvish.shah</li>
+                                <li>Udgam Convener: k.deshmukh |</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Hostel Affairs Board</h4>
+                            <ul class="list-unstyled">
+                                <li>Chairman: chr_hab</li>
+                                <li>General Secretary: gensec_hostel</li>
+                                <li>GenSec Barak: gensec.barak</li>
+                                <li>GenSec Brahmaputra: gensec.brahmaputra</li>
+                                <li>GenSec Dhansiri: gensec.dhansiri</li>
+                                <li>GenSec Dibang: gensec.dibang</li>
+                                <li>GenSec Dihing: gensec.dihing</li>
+                                <li>GenSec Kameng: gensec.kameng</li>
+                                <li>GenSec Kapili: gensec.kapili</li>
+                                <li>GenSec Lohit: gensec.lohit</li>
+                                <li>GenSec Manas: gensec.manas</li>
+                                <li>GenSec Siang: gensec.siang</li>
+                                <li>GenSec Subansiri: gensec.subansiri</li>
+                                <li>GenSec Umiam: gensec.umiam</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4>Hostel Wardens</h4>
+                            <ul class="list-unstyled">
+                                <li>Barak: warden.barak</li>
+                                <li>Brahmaputra: warden.brahmaputra</li>
+                                <li>Dhansiri: warden.dhansiri</li>
+                                <li>Dibang: warden.dibang</li>
+                                <li>Dihing: warden.dihing</li>
+                                <li>Kameng: warden.kameng</li>
+                                <li>Kapili: warden.kapili</li>
+                                <li>Lohit: warden.lohit</li>
+                                <li>Manas: warden.manas</li>
+                                <li>Siang: warden.siang</li>
+                                <li>Subansiri: warden.subansiri</li>
+                                <li>Umiam: warden.umiam</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Welfare Board</h4>
+                            <ul class="list-unstyled">
+                                <li>Chairman: chrwb</li>
+                                <li>General Secretary: gensec_welfare</li>
+                                <li>Counselling Club: anmol.mishra</li>
+                                <li>Rights and Responsibility Club: b.kothari</li>
+                                <li>Academic Initiative Club: ayyanki</li>
+                                <li>Social Service Club: ayush2016</li>
+                                <li>Youth Empowerment Club: r.geddapu</li>
+                                <li>Red Ribbon Club: aditya.potini</li>
+                            </ul>
+                            <h4>Campus Broadcasting System</h4>
+                            <ul class="list-unstyled">
+                                <li>DoSA for CBS: dos</li>
+                                <li>General Secretary: </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Student Academic Board</h4>
+                            <ul class="list-unstyled">
+                                <li>DoAA for SAB: doaa</li>
+                                <li>General Secretary: bikash.2015</li>
+                                <li>Research Conclave Convener:</li>
+                            </ul>
+                            <h4>Student Web Committee</h4>
+                            <ul class="list-unstyled">
+                                <li>DoSA for SWC: dos</li>
+                                <li>General Secretary: </li>
+                            </ul>
+                            <h4>Student Alumni Interaction Linkage</h4>
+                            <ul class="list-unstyled">
+                                <li>DoAAER for SAIL: doaaer</li>
+                                <li>Convener: </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4>Department Bodies</h4>
+                            <ul class="list-unstyled">
+                                <li>Faculty Coordinator CSEA:</li>
+                                <li>Faculty Coordinator Cepstrum:</li>
+                                <li>Faculty Coordinator Matrix:</li>
+                                <li>Faculty Coordinator MESA:</li>
+                                <li>Faculty Coordinator ACE:</li>
+                                <li>Faculty Coordinator Reflux:</li><br>
+                                <li>General Secretary CSEA:</li>
+                                <li>General Secretary Cepstrum:</li>
+                                <li>General Secretary Matrix:</li>
+                                <li>General Secretary MESA:</li>
+                                <li>General Secretary ACE:</li>
+                                <li>General Secretary Reflux:</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <h4>Sports Board</h4>
+                            <ul class="list-unstyled">
+                                <li>Chairman: chrsports</li>
+                                <li>General Secretary: sportsec</li>
+                                <li>Aquatics Club: nikunj.mittal</li>
+                                <li>Athletics Club: tejveer.singh</li>
+                                <li>Badminton Club: nikhil.jha</li>
+                                <li>Basketball Club: ashutosh.km</li>
+                                <li>Cricket Club: ragvendr1994</li>
+                                <li>Football Club: s.parva</li>
+                                <li>Hockey Club: m.dave</li>
+                                <li>Squash Club: ashutosh.des</li>
+                                <li>Tennis Club: mohit.sachan</li>
+                                <li>Table Tennis Club: arooshi</li>
+                                <li>Volleyball Club: hakim.gurjar</li>
+                                <li>Weightlifting Club: deepak.maurya</li>
+                                <li>Indoor sports Club:</li>
+                                <li>Kho-kho Club:</li>
+                                <li>Skating Club:</li>
+                                <li>Spirit Convener:</li>
+                                <li>Gym coordinator:</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <p class="copyright pull-right">
+                        Developed by <a href="https://www.facebook.com/mukul.verma.3745">Mukul Verma</a> and <a href="https://www.facebook.com/sarvesh83">Sarvesh Raj</a>
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/material.min.js" type="text/javascript"></script>
+
+<!--  PerfectScrollbar Library -->
+<script src="js/perfect-scrollbar.jquery.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="js/bootstrap-notify.js"></script>
+
+<script src="js/material-dashboard.js?v=1.2.0"></script>
+
+</html>

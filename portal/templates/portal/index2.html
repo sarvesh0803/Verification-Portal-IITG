@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+     {% load static %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Verification Portal | IIT Guwahati</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="{% static 'portal/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'portal/material-dashboard.css' %}" rel="stylesheet" />
+    <link href="{% static 'portal/custom.css' %}" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="img/sidebar-1.jpg">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    Verification Portal
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="{% url 'portal:pending' %}" >
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">person</i>
+                            <p>Profile</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">search</i>
+                            <p>Search</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'portal:create_team_page' %}">
+                            <i class="material-icons">create</i>
+                            <p>Create</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">help</i>
+                            <p>Help</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="#">
+                            <i class="material-icons">settings_power</i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"> Dashboard </a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <h4 class="nav navbar-nav navbar-right">Welcome, <b><span class="mkv_user">{{ user }}</span>!</b></h4>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card card-nav-tabs">
+                                <div class="card-header" data-background-color="purple">
+                                    <div class="nav-tabs-navigation">
+                                        <div class="nav-tabs-wrapper">
+                                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                                <li class="active">
+                                                    <a href="#pending" data-toggle="tab">
+                                                        <i class="material-icons">restore</i> Pending
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#approved" data-toggle="tab">
+                                                        <i class="material-icons">done_all</i> Approved
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                </li>
+                                                {% if user3 != "" %}
+                                                <li class="">
+                                                    <a href="#requests" data-toggle="tab">
+                                                        <i class="material-icons">announcement</i> Requests
+                                                        <div class="ripple-container"></div>
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="pending">
+                                            <div class="row">
+                                                {% for x in obj %}
+                                                    {% if x.pending == True %}
+                                                <div class="col-lg-6">
+                                                    <div class="card card-stats">
+                                                        {% if forloop.counter|divisibleby:2 == 1 %}
+                                                        <div class="card-header" data-background-color="orange">
+                                                            {% else %}
+                                                        <div class="card-header" data-background-color="green">
+                                                        {% endif %}
+                                                            <i class="material-icons">content_copy</i>
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <p class="category"><span class="mkv_team_applied">{{ x.request_event }}</span>, <span class="mkv_subtitle_applied">{{ x.request_event_subtitle }}</span></p>
+                                                            <h3 class="title mkv_post_applied">{{ x.request_post }}</h3>
+                                                        </div>
+                                                        <!-- mkv: Check the title attribute in the div below. It shows at what stage the request is pending at. You'll have to add a variable there too -->
+
+
+                                                            {% with z as x.request_at_stage %}
+                                                            <div class="progress" data-toggle="tooltip" title="Pending at: {{ x.pending_at }}" data-placement="bottom">
+
+                                                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {% widthratio 25 1 x.request_at_stage|add:1 %}%">
+                                                                <span class="mkv_step">{% widthratio 25 1 x.request_at_stage|add:1 %}%</span>
+                                                            </div>
+
+                                                        </div>
+                                                            {% endwith %}
+
+                                                        <div class="card-footer row">
+                                                            <div class="col-xs-4 text-center">
+                                                                <p class="mkv_uta">{{ x.board }}</p>
+                                                            </div>
+                                                            <div class="col-xs-2 text-center">
+                                                                <p class="mkv_year">{{ x.request_year }}</p>
+                                                            </div>
+                                                            <div class="col-xs-6 text-center">
+                                                                <p>Team created by: <span class="mkv_team_creator">{{ x.request_creater_name }}</span></p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                               {% if user3 != "" %}
+                                                <hr>
+                                                <h5>&ensp;Teams</h5>
+
+                                                 {% for z in obj2 %}
+                                                {% if z.pending == True %}
+                                                <div class="col-lg-6">
+                                                    <div class="card card-stats">
+                                                        <div class="card-header" data-background-color="green">
+                                                            <i class="material-icons">content_copy</i>
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <h4 class="category"><span class="mkv_team_applied">{{ z.request_team.team_name }}</span></h4><p> <span class="category">{{ z.request_team.subtitle }}</span></p>
+                                                            <!--<h3 class="title mkv_post_applied">Marketing Head</h3>-->
+                                                        </div>
+                                                        <!-- mkv: Check the title attribute in the div below. It shows at what stage the request is pending at. You'll have to add a variable there too -->
+                                                        <div class="progress" data-toggle="tooltip" title="Pending at: {{ z.pending_at }}" data-placement="bottom">
+                                                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {% widthratio 25 1 z.request_at_stage|add:1 %}%">
+                                                                <span class="mkv_step">{% widthratio 25 1 z.request_at_stage|add:1 %}%</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer row">
+                                                            <div class="col-xs-6 text-center">
+                                                                <p class="mkv_uta">{{ z.under }}</p>
+                                                            </div>
+                                                            <div class="col-xs-6 text-center">
+                                                                <p class="mkv_year">{{ z.team_year }}</p>
+                                                            </div>
+                                                            <!--<div class="col-xs-6 text-center">-->
+                                                                <!--<p>Team created by: <span class="mkv_team_creator">Animesh Jain</span></p>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% endif %}
+                                        </div>
+                                        <div class="tab-pane" id="approved">
+                                            <!-- Demo approved card below -->
+                                            <!-- To remember: subtitle can take maximum of 50 characters -->
+                                            <!-- <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="card card-stats">
+                                                        <div class="card-header" data-background-color="orange">
+                                                            <i class="material-icons">content_copy</i>
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <p class="category"><span class="mkv_title">Alcheringa</span>, <span class="mkv_subtitle">The Annual Cultural Festival of IIT Guwahati</span></p>
+                                                            <h3 class="title mkv_post">Convener</h3>
+                                                        </div>
+                                                        <div class="card-footer row">
+                                                            <div class="col-lg-4">
+                                                                <p class="mkv_uta">Cultural Board</p>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <p class="mkv_year">2017-18</p>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <p>Team created by: <span class="mkv_team_creator">Meet Shah</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="card card-stats">
+                                                        <div class="card-header" data-background-color="orange">
+                                                            <i class="material-icons">content_copy</i>
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <p class="category"><span class="mkv_title">Alcheringa</span>, <span class="mkv_subtitle">The Annual Cultural Festival of IIT Guwahati</span></p>
+                                                            <h3 class="title mkv_post">Convener</h3>
+                                                        </div>
+                                                        <div class="card-footer row">
+                                                            <div class="col-lg-4">
+                                                                <p class="mkv_uta">Cultural Board</p>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <p class="mkv_year">2017-18</p>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <p>Team created by: <span class="mkv_team_creator">Meet Shah</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <div class="row">
+                                                {% for x in obj %}
+                                                    {% if x.approved == True %}
+                                                <div class="col-lg-6">
+                                                    <div class="card card-stats">
+                                                        <!-- mkv: The data-background-color attrbute in the div below will change according to the uta -->
+                                                        {% if forloop.counter|divisibleby:2 == 1 %}`
+                                                        <div class="card-header" data-background-color="orange">
+                                                            {% else %}
+                                                        <div class="card-header" data-background-color="green">
+                                                            {% endif %}
+                                                            <!-- mkv: mkv: The img will contain the logo of the uta -->
+                                                            <img src="{% static 'portal/cult.png' %}" class="img-responsive uta_logo">
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <p class="category"><span class="mkv_team"> {{ x.request_event }}</span>, <span class="mkv_subtitle">{{ x.request_event_subtitle }}</span></p>
+                                                            <h3 class="title mkv_post">{{ x.request_post }}</h3>
+                                                        </div>
+                                                        <div class="card-footer row">
+                                                            <div class="col-xs-4 text-center">
+                                                                <p class="mkv_uta">{{ x.board }}</p>
+                                                            </div>
+                                                            <div class="col-xs-2 text-center">
+                                                                <p class="mkv_year">{{ x.request_year }}</p>
+                                                            </div>
+                                                            <div class="col-xs-6 text-center">
+                                                                <p>Team created by: <span class="mkv_team_creator">{{ x.request_creater_name }}</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                                <!--<div class="col-lg-6">-->
+                                                    <!--<div class="card card-stats">-->
+                                                        <!--&lt;!&ndash; mkv: The data-background-color attrbute in the div below will change according to the uta &ndash;&gt;-->
+                                                        <!--<div class="card-header" data-background-color="geen">-->
+                                                            <!--&lt;!&ndash; mkv: The img will contain the logo of the uta &ndash;&gt;-->
+                                                            <!--<img src="{% static 'portal/cult.png' %}" class="img-responsive uta_logo">-->
+                                                        <!--</div>-->
+                                                        <!--<div class="card-content">-->
+                                                            <!--<p class="category"><span class="mkv_team">Techniche</span>, <span class="mkv_subtitle">The Annual Techno-Management Festival</span></p>-->
+                                                            <!--<h3 class="title mkv_post">Marketing Head</h3>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="card-footer row">-->
+                                                            <!--<div class="col-xs-4 text-center">-->
+                                                                <!--<p class="mkv_uta">Technical Board</p>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col-xs-2 text-center">-->
+                                                                <!--<p class="mkv_year">2016-17</p>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col-xs-6 text-center">-->
+                                                                <!--<p>Team created by: <span class="mkv_team_creator">Animesh Jain</span></p>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            </div>
+                                                {% if user3 != "" %}
+                                                <hr>
+                                                <h5>&ensp;Teams</h5>
+                                                {% for z in obj2 %}
+                                                {% if z.approved == True %}
+                                                 <div class="col-lg-6">
+                                                    <div class="card card-stats">
+                                                        <!-- mkv: The data-background-color attrbute in the div below will change according to the uta -->
+                                                        <div class="card-header" data-background-color="green">
+                                                            <!-- mkv: The img will contain the logo of the uta -->
+                                                            <img src="{% static 'portal/cult.png' %}" class="img-responsive uta_logo">
+                                                        </div>
+                                                        <div class="card-content">
+                                                            <h3 class="category"><span class="mkv_team_applied">{{ z.request_team.team_name }}</span></h3><p> <span class="category">{{ z.request_team.subtitle }}</span></p>
+                                                            <!--<h3 class="title mkv_post">Marketing Head</h3>-->
+                                                        </div>
+                                                        <div class="card-footer row">
+                                                            <div class="col-xs-6 text-center">
+                                                                <p class="mkv_uta">{{ z.under }}</p>
+                                                            </div>
+                                                            <div class="col-xs-6 text-center">
+                                                                <p class="mkv_year">{{ z.team_year }}</p>
+                                                            </div>
+                                                            <!--<div class="col-xs-6 text-center">-->
+                                                                <!--<p>Team created by: <span class="mkv_team_creator">Animesh Jain</span></p>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% endif %}
+                                        </div>
+
+
+                                        <div class="tab-pane" id="requests">
+                                            <div class="row">
+                                                 {% for x in obj3 %}
+                                                {% if forloop.counter|divisibleby:2 == 0 %}
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <!-- mkv: The data-background-color attrbute in the div below will change according to the uta -->
+
+                                                        <div class="card-header card-chart" data-background-color="orange">
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-3">
+                                                                    <!-- mkv: The img will contain the logo of the uta -->
+                                                                    <img src="{% static 'portal/cult.png' %}" class="img-responsive">
+                                                                </div>
+                                                                <div class="col-xs-9">
+                                                                    <h2 class="pull-right mkv_post_request">{{ x.request_post }}</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-2 text-center">
+                                                                    <h5 class="mkv_year_request">{{ x.request_year }}</h5>
+                                                                </div>
+                                                                <div class="col-xs-10">
+                                                                    <h5 class="pull-right"><span class="mkv_team_request">{{ x.request_event }}</span>, <span class="mkv_subtitle_request">{{ x.request_event_subtitle }}</span></h5>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-12">
+                                                                    <h3>Applicant: <span class="mkv_name">{{ x.request_user}}</span></h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <form method="post"  action="{% url 'portal:approve_request' %}" id="approval{{ forloop.counter }}" name="approval{{ forloop.counter }}">
+                                                            {% csrf_token %}
+                                                             <input type="text" name="request_id" id="request_id" value="{{ x.id }}"   style="visibility:hidden;"><br>
+                                                        <div class="card-content">
+                                                             <div class="row">
+                                                                <div class="col-xs-6 text-center">
+                                                                    <button class="btn btn-success" id="submit" name = "submit" form="approval{{ forloop.counter }}">Approve</button>
+                                                                </div>
+                                                                <div class="col-xs-6 text-center">
+                                                                    <button class="btn btn-danger" name="decline" form="approval{{ forloop.counter }}">Decline</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        </form>
+                                                        <div class="card-footer row">
+                                                            <div class="col-xs-5 text-center mkv_uta">{{ x.board }}</div>
+                                                            <div class="col-xs-7 text-center">
+                                                                Team created by: <span class="mkv_team_creator">{{ x.request_creater_name }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                 <div class="col-md-6">
+                                                    <div class="card">
+                                                        <!-- mkv: The data-background-color attrbute in the div below will change according to the uta -->
+
+                                                        <div class="card-header card-chart" data-background-color="green">
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-3">
+                                                                    <!-- mkv: The img will contain the logo of the uta -->
+                                                                    <img src="{% static 'portal/cult.png' %}" class="img-responsive">
+                                                                </div>
+                                                                <div class="col-xs-9">
+                                                                    <h2 class="pull-right mkv_post_request">{{ x.request_post }}</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-2 text-center">
+                                                                    <h5 class="mkv_year_request">{{ x.request_year }}</h5>
+                                                                </div>
+                                                                <div class="col-xs-10">
+                                                                    <h5 class="pull-right"><span class="mkv_team_request">{{ x.request_event }}</span>, <span class="mkv_subtitle_request">{{ x.request_event_subtitle }}</span></h5>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-12">
+                                                                    <h3>Applicant: <span class="mkv_name">{{ x.request_user}}</span></h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <form method="post"  action="{% url 'portal:approve_request' %}" id="approval{{ forloop.counter }}" name="approval{{ forloop.counter }}">
+                                                            {% csrf_token %}
+                                                             <input type="text" name="request_id" id="request_id" value="{{ x.id }}"   style="visibility:hidden;"><br>
+                                                        <div class="card-content">
+                                                             <div class="row">
+                                                                <div class="col-xs-6 text-center">
+                                                                    <button class="btn btn-success" id="submit" name = "submit" form="approval{{ forloop.counter }}">Approve</button>
+                                                                </div>
+                                                                <div class="col-xs-6 text-center">
+                                                                    <button class="btn btn-danger" name="decline" form="approval{{ forloop.counter }}">Decline</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        </form>
+                                                        <div class="card-footer row">
+                                                            <div class="col-xs-5 text-center mkv_uta">{{ x.board }}</div>
+                                                            <div class="col-xs-7 text-center">
+                                                                Team created by: <span class="mkv_team_creator">{{ x.request_creater_name }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                                <!--<div class="col-md-6">-->
+                                                    <!--<div class="card">-->
+                                                        <!--<div class="card-header card-chart" data-background-color="green">-->
+                                                            <!--<div class="row request-card">-->
+                                                                <!--<div class="col-xs-3">-->
+                                                                    <!--<img src="{% static 'portal/cult.png' %}" class="img-responsive">-->
+                                                                <!--</div>-->
+                                                                <!--<div class="col-xs-9">-->
+                                                                    <!--<h2 class="pull-right mkv_post_request">Event Manager</h2>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="row request-card">-->
+                                                                <!--<div class="col-xs-2 text-center">-->
+                                                                    <!--<h5 class="mkv_year_request">2017-18</h5>-->
+                                                                <!--</div>-->
+                                                                <!--<div class="col-xs-10">-->
+                                                                    <!--<h5 class="pull-right"><span class="mkv_team_request">Equinox</span>, <span class="mkv_subtitle_request">The Astronomy Club of IIT Guwahati</span></h5>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="row request-card">-->
+                                                                <!--<div class="col-xs-12">-->
+                                                                    <!--<h3>Applicant: <span class="mkv_name">Saloni Verma</span></h3>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="card-content">-->
+                                                            <!--<div class="row">-->
+                                                                <!--<div class="col-xs-6 text-center">-->
+                                                                    <!--<button class="btn btn-success">Approve</button>-->
+                                                                <!--</div>-->
+                                                                <!--<div class="col-xs-6 text-center">-->
+                                                                    <!--<button class="btn btn-danger">Decline</button>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="card-footer row">-->
+                                                            <!--<div class="col-xs-5 text-center mkv_uta">-->
+                                                                <!--Technical Board-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col-xs-7 text-center">-->
+                                                                <!--Team created by: <span class="mkv_team_creator">Ashutosh Sharma</span>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                </div>
+                                                <hr>
+                                                <h4>&ensp;Teams</h4>
+                                                      {% for x in obj4 %}
+                                                {% if forloop.counter|divisibleby:2 == 0 %}
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <!-- mkv: The data-background-color attrbute in the div below will change according to the uta -->
+
+                                                        <div class="card-header card-chart" data-background-color="orange">
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-3">
+                                                                    <!-- mkv: The img will contain the logo of the uta -->
+                                                                    <img src="{% static 'portal/cult.png' %}" class="img-responsive">
+                                                                </div>
+                                                                <div class="col-xs-9">
+                                                                    <h2 class="pull-right mkv_post_request">{{ x.request_team.team_name }}</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-2 text-center">
+                                                                    <h5 class="mkv_year_request">{{ x.team_year }}</h5>
+                                                                </div>
+                                                                <!--<div class="col-xs-10">-->
+                                                                    <!--<h5 class="pull-right"><span class="mkv_team_request">{{ x.request_event }}</span>, <span class="mkv_subtitle_request">The Movie Club of IIT Guwahati</span></h5>-->
+                                                                <!--</div>-->
+                                                            </div>
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-12">
+                                                                    <h3>Applicant: <span class="mkv_name">{{ x.team_creater_name }}</span></h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <form method="post"  action="{% url 'portal:approve_team_request' %}" id="approval_team{{ forloop.counter }}" name="approval_team{{ forloop.counter }}">
+                                                            {% csrf_token %}
+                                                             <input type="text" name="request_id" id="team_id" value="{{ x.id }}"   style="visibility:hidden;"><br>
+                                                        <div class="card-content">
+                                                             <div class="row">
+                                                                <div class="col-xs-6 text-center">
+                                                                    <button class="btn btn-success" id="submit" name = "submit" form="approval_team{{ forloop.counter }}">Approve</button>
+                                                                </div>
+                                                                <div class="col-xs-6 text-center">
+                                                                    <button class="btn btn-danger" name="decline" form="approval_team{{ forloop.counter }}">Decline</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        </form>
+                                                        <div class="card-footer row">
+                                                            <div class="col-xs-12 text-center mkv_uta">{{ x.under }}</div>
+                                                            <!--<div class="col-xs-7 text-center">-->
+                                                                <!--Team created by: <span class="mkv_team_creator">{{ x }}</span>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <!-- mkv: The data-background-color attrbute in the div below will change according to the uta -->
+
+                                                        <div class="card-header card-chart" data-background-color="orange">
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-3">
+                                                                    <!-- mkv: The img will contain the logo of the uta -->
+                                                                    <img src="{% static 'portal/cult.png' %}" class="img-responsive">
+                                                                </div>
+                                                                <div class="col-xs-9">
+                                                                    <h2 class="pull-right mkv_post_request">{{ x.request_team.team_name }}</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-2 text-center">
+                                                                    <h5 class="mkv_year_request">{{ x.team_year }}</h5>
+                                                                </div>
+                                                                <!--<div class="col-xs-10">-->
+                                                                    <!--<h5 class="pull-right"><span class="mkv_team_request">{{ x.request_event }}</span>, <span class="mkv_subtitle_request">The Movie Club of IIT Guwahati</span></h5>-->
+                                                                <!--</div>-->
+                                                            </div>
+                                                            <div class="row request-card">
+                                                                <div class="col-xs-12">
+                                                                    <h3>Applicant: <span class="mkv_name">{{ x.team_creater_name }}</span></h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <form method="post"  action="{% url 'portal:approve_team_request' %}" id="approval_team{{ forloop.counter }}" name="approval_team{{ forloop.counter }}">
+                                                            {% csrf_token %}
+                                                             <input type="text" name="request_id" id="team_id" value="{{ x.id }}"   style="visibility:hidden;"><br>
+                                                        <div class="card-content">
+                                                             <div class="row">
+                                                                <div class="col-xs-6 text-center">
+                                                                    <button class="btn btn-success" id="submit" name = "submit" form="approval_team{{ forloop.counter }}">Approve</button>
+                                                                </div>
+                                                                <div class="col-xs-6 text-center">
+                                                                    <button class="btn btn-danger" name="decline" form="approval_team{{ forloop.counter }}">Decline</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        </form>
+                                                        <div class="card-footer row">
+                                                            <div class="col-xs-12 text-center mkv_uta">{{ x.under }}</div>
+                                                            <!--<div class="col-xs-7 text-center">-->
+                                                                <!--Team created by: <span class="mkv_team_creator">{{ x }}</span>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
+
+                                                <!--<div class="col-md-6">-->
+                                                    <!--<div class="card">-->
+                                                        <!--<div class="card-header card-chart" data-background-color="green">-->
+                                                            <!--<div class="row request-card">-->
+                                                                <!--<div class="col-xs-3">-->
+                                                                    <!--<img src="{% static 'portal/cult.png' %}" class="img-responsive">-->
+                                                                <!--</div>-->
+                                                                <!--<div class="col-xs-9">-->
+                                                                    <!--<h2 class="pull-right mkv_post_request">Event Manager</h2>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="row request-card">-->
+                                                                <!--<div class="col-xs-2 text-center">-->
+                                                                    <!--<h5 class="mkv_year_request">2017-18</h5>-->
+                                                                <!--</div>-->
+                                                                <!--<div class="col-xs-10">-->
+                                                                    <!--<h5 class="pull-right"><span class="mkv_team_request">Equinox</span>, <span class="mkv_subtitle_request">The Astronomy Club of IIT Guwahati</span></h5>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="row request-card">-->
+                                                                <!--<div class="col-xs-12">-->
+                                                                    <!--<h3>Applicant: <span class="mkv_name">Saloni Verma</span></h3>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="card-content">-->
+                                                            <!--<div class="row">-->
+                                                                <!--<div class="col-xs-6 text-center">-->
+                                                                    <!--<button class="btn btn-success">Approve</button>-->
+                                                                <!--</div>-->
+                                                                <!--<div class="col-xs-6 text-center">-->
+                                                                    <!--<button class="btn btn-danger">Decline</button>-->
+                                                                <!--</div>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                        <!--<div class="card-footer row">-->
+                                                            <!--<div class="col-xs-5 text-center mkv_uta">-->
+                                                                <!--Technical Board-->
+                                                            <!--</div>-->
+                                                            <!--<div class="col-xs-7 text-center">-->
+                                                                <!--Team created by: <span class="mkv_team_creator">Ashutosh Sharma</span>-->
+                                                            <!--</div>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <p class="copyright pull-right">
+                        Developed by <a href="">Mukul Verma</a> and <a href="">Sarvesh Raj</a>
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="{% static 'portal/jquery-3.2.1.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'portal/bootstrap.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'portal/material.min.js' %}" type="text/javascript"></script>
+<!--  PerfectScrollbar Library -->
+<script src="{% static 'portal/perfect-scrollbar.jquery.min.js' %}"></script>
+<!--  Notifications Plugin    -->
+<script src="{% static 'portal/bootstrap-notify.js' %}"></script>
+<script src="{% static 'portal/material-dashboard.js' %}"></script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+</html>

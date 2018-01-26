@@ -1,0 +1,32 @@
+<h1>hello I m the boss type1 user</h1>
+
+{{ user.profile.webmail }}
+
+
+<form  method="post" action="{% url 'portal:logout' %}" name="logout" id="logout">
+    {% csrf_token %}
+    <button form="logout">Logout</button>
+</form>
+
+
+
+<form  method="post" action="{% url 'portal:create_team_page' %}" name="create_page" id="create_page">
+    {% csrf_token %}
+    <button form="create_page">Create team</button>
+
+</form>
+
+
+
+<form  method="get" action="{% url 'portal:show_request_user2' %}" name="show_request1" id="show_request1">
+
+    <button form="show_request1">Post</button>
+
+</form>
+
+
+<form  method="post" action="{% url 'portal:pending' %}" name="pending" id="pending">
+    {% csrf_token %}
+    <button form="pending">See Pending Request</button>
+
+</form>

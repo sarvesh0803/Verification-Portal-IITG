@@ -1,0 +1,11 @@
+<p>Applying in team: {{ team.team_name }}</p>
+<p>Year : {{ team.year }}</p><br>
+
+
+
+<form action="/portal/apply_event/{{team_id}}/"  method="post" id="Apply team" name="Apply team">
+    {% csrf_token %}
+    <input type="text" placeholder="Post" name="post" id="post">
+    <input type="text" placeholder="{{team_id}}" name="team_id" id="team_id" style="visibility:hidden">
+     <input type="submit" value="Apply Post" form="Apply team">
+</form>

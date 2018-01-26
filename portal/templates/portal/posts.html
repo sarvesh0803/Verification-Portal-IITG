@@ -1,0 +1,46 @@
+
+<body><h3>Post to be approve</h3>
+<ol>
+{% for obj in posts_pending %}
+
+<li><h5>Student Name : {{ obj.request_user}} </h5>
+<h5>Post Name : {{ obj.request_post }}</h5>
+<h5>Event Name : {{ obj.request_event }}</h5>
+    </li>
+
+
+<form method="post"  action="{% url 'portal:approve_request' %}" id="approval{{ forloop.counter }}" name="approval{{ forloop.counter }}">
+    {% csrf_token %}
+    <input type="checkbox" name="option"  value="approved"><label>Approve Request</label><br><br>
+    <input type="checkbox" name="option"  value="rejected"><label>Decline Request</label><br><br>
+    <input type="text" name="request_id" id="request_id" value="{{ obj.id }}"   style="visibility:hidden;"><br>
+    <input type="submit" form="approval{{ forloop.counter }}" value="Submit Response" >
+</form>
+
+
+{% endfor %}
+
+{% for obj in teams_pending %}
+
+<li><h5>Student Name : {{ obj.team_created_by }} </h5>
+<h5>Team Name : {{ obj.request_team }}</h5>
+    </li>
+
+
+<form method="post"  action="{% url 'portal:approve_team_request' %}" id="approval_team{{ forloop.counter }}" name="approval{{ forloop.counter }}">
+    {% csrf_token %}
+    <input type="checkbox" name="option"  value="approved"><label>Approve Request</label><br><br>
+    <input type="checkbox" name="option"  value="rejected"><label>Decline Request</label><br><br>
+    <input type="text" name="request_id" id="team_id" value="{{ obj.id }}"   style="visibility:hidden;"><br>
+    <input type="submit" form="approval_team{{ forloop.counter }}" value="Submit Response" >
+</form>
+
+
+{% endfor %}
+
+
+
+
+</ol>
+</body>
+
