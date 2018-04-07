@@ -11,3 +11,25 @@
 a{
 	color: white;
 }
+
+
+/*first time login css*/
+.details > p{
+  margin: 20px 0;
+}
+.details > .footer{
+  padding-top: 12.4px;
+  color: black;
+  padding-bottom: 25px
+}
+h5.category{
+	font-size: 14px;
+}
+.use .col-xs-2{
+	margin-top: 13px;
+	padding-left: 60px;
+}
+.firstLogin{
+	text-align: justify;
+	padding-right: 20px;
+}

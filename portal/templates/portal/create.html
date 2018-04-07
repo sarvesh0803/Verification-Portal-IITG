@@ -14,10 +14,6 @@
     <link href="{% static 'portal/bootstrap.min.css' %}" rel="stylesheet" />
     
     <link href="{% static 'portal/material-dashboard.css' %}" rel="stylesheet" />
-    <script src="{% static 'portal/jquery-2.0.0.min.js' %}"></script>
-    <link href="{% static 'portal/create.css' %}" rel="stylesheet" />
-
-    <script src="{% static 'portal/create.js' %}" type="text/javascript"></script>
     <!--     Fonts and icons     -->
 
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +24,8 @@
     <div class="wrapper">
         <div class="sidebar" data-color="purple" data-image="{% static 'portal/sidebar-1.jpg' %}">
             <div class="logo">
-                <a href="#" class="simple-text">
+               <img src="{% static 'portal/iitg no bg.png' %}" class="img-responsive center-block">
+                <a href="{% url 'portal:pending' %}" class="simple-text">
                     Verification Portal
                 </a>
             </div>
@@ -46,20 +43,24 @@
                             <p>Search</p>
                         </a>
                     </li>
+                    {% if user3 != "" %}
                     <li class="active">
                         <a href="{% url 'portal:create_team_page' %}">
                             <i class="material-icons">create</i>
                             <p>Create</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="user.html">
+                    {% endif %}
+                     {% if webmail not in web %}
+                     <li>
+                        <a href="{% url 'portal:profile' %}">
                             <i class="material-icons">person</i>
                             <p>Profile</p>
                         </a>
                     </li>
+                    {% endif %}
                     <li>
-                        <a href="help.html">
+                        <a href="{% url 'portal:help' %}">
                             <i class="material-icons">help</i>
                             <p>Help</p>
                         </a>
@@ -86,7 +87,7 @@
                         <a class="navbar-brand" href="#"> Dashboard </a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        <h4 class="nav navbar-nav navbar-right">Welcome, <b><span class="mkv_user">{{ user.username }}</span>!</b></h4>
+                        <h4 class="nav navbar-nav navbar-right">Welcome, <b><span class="mkv_user">{{ user.profile.username }}</span>!</b></h4>
                     </div>
                 </div>
             </nav>
@@ -106,13 +107,13 @@
                                             <div class="col-md-4">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Team name</label>
-                                                    <input type="text" class="form-control" name="team" id="team">
+                                                    <input type="text" class="form-control" name="team" id="team" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Subtitle</label>
-                                                    <input type="text" class="form-control" name="subtitle" id="subtitle">
+                                                    <input type="text" class="form-control" name="subtitle" id="subtitle" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,24 +121,25 @@
                                             <div class="col-md-2">
                                                 <div class="form-group label-floating">
                                                     <label class="control-label">Year</label>
-                                                    <select class="form-control" name="year" id="year">
+                                                    <select class="form-control" name="year" id="year" required>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
-                                            	<div class="form-group label-floating">
+                                            	<div class="form-group label-floating select-with-placeholder">
 	                                                <label for="sel1" class="control-label">Under the aegis of</label>
-												    <select class="form-control" name="uta" id="uta">
-												    	<option selected hidden>-- Please select --</option>
+												    <select class="form-control" name="uta" id="uta" required>
+												    	<option selected hidden value="">-- Please select --</option>
 												    	<option>Campus Broadcasting System</option>
+                                                        <option>Centre for Career Development</option>
 												    	<option>Cultural Board</option>
 												    	<option value="dept_body">Departmental Bodies</option>
 												    	<option>Hostel Affairs Board</option>
 												    	<option value="hostel_team">Hostel Teams</option>
 												    	<option>Sports Board</option>
-												    	<option>Student Academic Board</option>
+												    	<option>Students' Academic Board</option>
 												    	<option>Student Alumni Interaction Linkage</option>
-												    	<option>Student Web Committee</option>
+												    	<option>Students' Web Committee</option>
 												    	<option>Technical Board</option>
 												    	<option>Welfare Board</option>
 												    	<option>Others</option>
@@ -145,10 +147,10 @@
 												</div>
                                             </div>
                                             <div class="col-md-5" id="hostel" style="display: none">
-                                                <div class="form-group label-floating">
+                                                <div class="form-group label-floating select-with-placeholder">
                                                     <label for="sel1" class="control-label">Hostel</label>
 												    <select class="form-control" name="hostels" id="hostels">
-												    	<option selected hidden>-- Please select --</option>
+												    	<option selected hidden value="">-- Please select --</option>
 												    	<option>Barak</option>
 												    	<option>Brahmaputra</option>
 												    	<option>Dhansiri</option>
@@ -166,10 +168,10 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-5" id="deptbody" style="display: none">
-                                                <div class="form-group label-floating">
+                                                <div class="form-group label-floating select-with-placeholder">
                                                     <label for="sel1" class="control-label">Body</label>
 												    <select class="form-control" name="bodies" id="bodies">
-												    	<option selected hidden>-- Please select --</option>
+												    	<option selected hidden value="">-- Please select --</option>
 												    	<option>ACE</option>
 												    	<option>Cepstrum</option>
 												    	<option>CSEA</option>
@@ -193,10 +195,7 @@
                 <div class="container-fluid">
                     <p class="copyright pull-right">
                         Developed by <a href="https://www.facebook.com/mukul.verma.3745">Mukul Verma</a> and <a href="https://www.facebook.com/sarvesh83">Sarvesh Raj</a>
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
+
                     </p>
                 </div>
             </footer>
@@ -214,34 +213,38 @@
 <script src="{% static 'portal/bootstrap-notify.js' %}" type="text/javascript"></script>
 
 <script src="{% static 'portal/material-dashboard.js' %}" type="text/javascript"></script>
-<script src="{% static 'portal/create.js' %}" type="text/javascript"></script>
 <script type="text/javascript">
 	$('#uta').on('change',function(){
      var selection = $(this).val();
     switch(selection){
     case "dept_body":
     $("#deptbody").show()
+    $('#bodies').prop('required', true);
     $("#hostel").hide()
+    $('#hostels').prop('required', false);
    	break;
    	case "hostel_team":
     $("#hostel").show()
+    $('#hostels').prop('required', true);
     $("#deptbody").hide()
+    $('#bodies').prop('required', false);
    	break;
     default:
     $("#hostel").hide()
+    $('#hostels').prop('required', false);
     $("#deptbody").hide()
+    $('#bodies').prop('required', false);
     }
 });
 </script>
 <script type="text/javascript">
 	var current = new Date().getFullYear();
     var start = current-1;
-    var options = "";
+    var options = "<option selected hidden>-- Please Select --</option>";
     for(var year = start; year <= current; year++){
         end=year+1;
         options += "<option>"+year+"-"+end+"</option>";
     }
     document.getElementById("year").innerHTML = options;
 </script>
-
 </html>

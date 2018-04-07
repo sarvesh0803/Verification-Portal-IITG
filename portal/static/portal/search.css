@@ -9,9 +9,6 @@
 #search .form-group.is-focused .form-control{
 	background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(white, white) !important;
 }
-.form-group{
-	margin-top: 15px;
-}
 #search .form-group{
 	margin-top: 0;
 	padding-bottom: 0;
@@ -39,7 +36,7 @@
 .collapse{
 	height: 83px;
 }
-.card-footer .col-xs-2, .card-footer .col-xs-9, .card-footer .col-xs-1{
+.card-footer .col-xs-2, .card-footer .col-xs-9, .card-footer .col-xs-1, .card-footer .col-xs-12{
     padding: 0;
 }
 .input-group-btn{

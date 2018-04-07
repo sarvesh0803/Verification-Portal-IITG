@@ -4,23 +4,7 @@
 .category{
     color: #616161 !important;
 }
-.request-card{
-    margin: auto 0;
-}
-.request-card h2{
-    margin-top: 10px;
-    margin-bottom: 0px;
-}
-.request-card h5{
-    margin-bottom: 10px;
-    margin-top: 0;
-    opacity: 0.9;
-}
-.request-card h3{
-    padding-top: 10px;
-    margin-top: 0px;
-    border-top: 1px solid rgba(238,238,238, 0.3);
-}
+
 .progress{
     margin: 0 20px 10px;
     border-top: 1px solid #eeeeee;
@@ -29,13 +13,7 @@
 .progress-bar{
     padding: 5px 0;
 }
-.tooltip > .tooltip-inner{
-    background: #555555;
-    color: #ffffff;
-}
-.tooltip.bottom > .tooltip-arrow{
-    border-bottom-color: #555555;
-}
+
 .uta_logo{
     width: 85px !important;
     height: auto;
@@ -52,7 +30,7 @@
 .message > .form-group{
     margin: 0 20px 10px;
 }
-.card-footer > .col-xs-4, .card-footer > .col-xs-2, .card-footer > .col-xs-6{
+.card-footer > .col-xs-3, .card-footer > .col-xs-7, .card-footer > .col-xs-5, .card-footer > .col-xs-4, .card-footer > .col-xs-2, .card-footer > .col-xs-6,  .card-footer > .col-xs-12{
     padding: 0;
 }
 .card-nav-tabs{
@@ -62,3 +40,13 @@
 .card-nav-tabs > .card-header{
     margin-bottom: 40px !important;
 }
+.main{
+  padding: 50px 70px;
+}
+
+
+
+
+
+
+

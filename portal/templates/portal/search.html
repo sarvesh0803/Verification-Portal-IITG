@@ -9,10 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Search | Verification Portal</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
 
-    <script src="{% static 'portal/ajax.js' %}"></script>
+    <meta name="viewport" content="width=device-width" />
+    <!--<script src="{% static 'portal/jquery-2.0.0.min.js' %}"></script>-->
     <script src="{% static 'portal/jquery-3.2.1.min.js' %}" type="text/javascript"></script>
+     <script src="{% static 'portal/ajax.js' %}"></script>
+
     <!-- Bootstrap core CSS     -->
     <link href="{% static 'portal/bootstrap.min.css' %}" rel="stylesheet" />
     
@@ -29,8 +31,9 @@
     <div class="wrapper">
         <div class="sidebar" data-color="purple" data-image="{% static 'portal/sidebar-1.jpg' %}">
             <div class="logo">
-                <a href="#" class="simple-text">
-                    Verification Portal
+                <img src="{% static 'portal/iitg no bg.png' %}" class="img-responsive center-block">
+                <a href="{% url 'portal:pending' %}" class="simple-text">
+                     Verification Portal
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -47,20 +50,24 @@
                             <p>Search</p>
                         </a>
                     </li>
+                    {% if user3 != "" %}
                     <li>
                         <a href="{% url 'portal:create_team_page' %}">
                             <i class="material-icons">create</i>
                             <p>Create</p>
                         </a>
-                    </li>                    
-                    <li>
-                        <a href="user.html">
+                    </li>
+                    {% endif %}
+                     {% if webmail not in web %}
+                     <li>
+                        <a href="{% url 'portal:profile' %}">
                             <i class="material-icons">person</i>
                             <p>Profile</p>
                         </a>
                     </li>
+                    {% endif %}
                     <li>
-                        <a href="help.html">
+                        <a href="{% url 'portal:help' %}">
                             <i class="material-icons">help</i>
                             <p>Help</p>
                         </a>
@@ -87,7 +94,7 @@
                         <a class="navbar-brand" href="#"> Search </a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        <h4 class="nav navbar-nav navbar-right">Welcome, <strong><span class="mkv_user">Sarvesh Raj</span>!</strong></h4>
+                        <h4 class="nav navbar-nav navbar-right">Welcome, <strong><span class="mkv_user">{{ user.profile.username }}</span>!</strong></h4>
                     </div>
                 </div>
             </nav>
@@ -110,8 +117,80 @@
                             </div>
                 </div>
                 <div class="container-fluid">
+                    <div class="row">
+                         <div class="col-md-4">
+                                <div class="form-group label-floating select-with-placeholder">
+                                    <label for="sel1" class="control-label">Filter your search...</label>
+                                    <select class="form-control" name="filter1" id="filter1" required>
+                                        <option value="All">All</option>
+                                        <option value="Team">Team</option>
+                                        <option value="Profile">Profiles</option>
+
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="col-md-4">
+                                <div class="form-group label-floating select-with-placeholder">
+                                    <label for="sel1" class="control-label">Under the aegis of</label>
+                                    <select class="form-control" name="filter2" id="filter2" required>
+                                        <option >All</option>
+                                        <option>Campus Broadcasting System</option>
+                                        <option>Centre for Career Development</option>
+                                        <option>Cultural Board</option>
+                                        <option value="dept_body">Departmental Bodies</option>
+                                        <option>Hostel Affairs Board</option>
+                                        <option value="hostel_team">Hostel Teams</option>
+                                        <option>Sports Board</option>
+                                        <option>Student Academic Board</option>
+                                        <option>Student Alumni Interaction Linkage</option>
+                                        <option>Student Web Committee</option>
+                                        <option>Technical Board</option>
+                                        <option>Welfare Board</option>
+                                        <option>Others</option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="col-md-4" id="hostel" style="display: none">
+                            <div class="form-group label-floating select-with-placeholder">
+                                <label for="sel1" class="control-label">Hostel</label>
+                                <select class="form-control" name="hostels" id="hostels">
+                                    <option>All</option>
+                                    <option>Barak</option>
+                                    <option>Brahmaputra</option>
+                                    <option>Dhansiri</option>
+                                    <option>Dibang</option>
+                                    <option>Dihing</option>
+                                    <option>Kameng</option>
+                                    <option>Kapili</option>
+                                    <option>Lohit</option>
+                                    <option>Manas</option>
+                                    <option>Married Scholars Hostel</option>
+                                    <option>Siang</option>
+                                    <option>Subansiri</option>
+                                    <option>Umiam</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="deptbody" style="display: none">
+                            <div class="form-group label-floating select-with-placeholder">
+                                <label for="sel1" class="control-label">Body</label>
+                                <select class="form-control" name="bodies" id="bodies">
+                                    <option>All</option>
+                                    <option>ACE</option>
+                                    <option>Cepstrum</option>
+                                    <option>CSEA</option>
+                                    <option>Matrix</option>
+                                    <option>MESA</option>
+                                    <option>Reflux</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                </div>
+                <div class="container-fluid">
                      {% csrf_token %}
                     <div class="input-group" id="search">
+
                         <input type="text" class="form-control" placeholder="Search for a team..."  id="search_team" name="search">
                         <div class="input-group-btn">
                           <button class="btn btn-default" type="submit">
@@ -122,70 +201,54 @@
 
 
                         <div  id="search-results">
-
                         </div>
 
-                        <!--<div class="col-lg-6">-->
-                            <!--<div class="card card-stats">-->
-                                <!--&lt;!&ndash; mkv: The data-background-color attrbute in the div below will change according to the uta &ndash;&gt;-->
-                                <!--<div class="card-header" data-background-color="green">-->
-                                    <!--&lt;!&ndash; mkv: The img will contain the logo of the uta &ndash;&gt;-->
-                                    <!--<img src="tech.png" class="img-responsive uta_logo">-->
-                                <!--</div>-->
-                                <!--<div class="card-content">-->
-                                    <!--<h3 class="title mkv_team">Techniche</h3>-->
-                                    <!--<p class="category"><span class="mkv_subtitle">The Annual Techno-Management Festival</span></p>-->
-                                <!--</div>-->
-                                <!--<div class="card-footer row">-->
-                                    <!--<div class="col-xs-2 text-center">-->
-                                            <!--2016-2017-->
-                                    <!--</div>-->
-                                    <!--<div class="col-xs-9 text-center">-->
-                                        <!--Team by: <span class="mkv_team_creator">Animesh Jain</span>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-xs-1 text-center">-->
-                                        <!--<a data-toggle="collapse" href="#apply2">Apply</a>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="row collapse card-footer" id="apply2">-->
-                                    <!--<div class="col-xs-8">-->
-                                        <!--<div class="form-group label-floating">-->
-                                            <!--<label class="control-label">Post applying for...</label>-->
-                                            <!--<input type="email" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-xs-4">-->
-                                        <!--<button class="btn btn-success">Submit</button>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
                     </div>
                 </div>
-            </div>
-
             <footer class="footer">
                 <div class="container-fluid">
                     <p class="copyright pull-right">
                         Developed by <a href="https://www.facebook.com/mukul.verma.3745">Mukul Verma</a> and <a href="https://www.facebook.com/sarvesh83">Sarvesh Raj</a>
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
+
                     </p>
                 </div>
             </footer>
+            </div>
+
+
         </div>
     </div>
 </body>
 <!--   Core JS Files   -->
+<script src="{% static 'portal/jquery-3.2.1.min.js' %}" type="text/javascript"></script>
 <script src="{% static 'portal/bootstrap.min.js' %}" type="text/javascript"></script>
+ <!--<script src="{% static 'portal/jquery-2.0.0.min.js' %}"></script>-->
 <script src="{% static 'portal/material.min.js' %}" type="text/javascript"></script>
 
 <!--  PerfectScrollbar Library -->
 <script src="{% static 'portal/perfect-scrollbar.jquery.min.js' %}"></script>
 <!--  Notifications Plugin    -->
 <script src="{% static 'portal/bootstrap-notify.js' %}"></script>
-<script src="{% static 'portal/material-dashboard.js' %}"></script>
 
+<script src="{% static 'portal/material-dashboard.js' %}"></script>
+<!--<script src="{% static 'portal/material-dashboard.js' %}"></script>-->
+<script type="text/javascript">
+	$('#filter2').on('change',function(){
+     var selection = $(this).val();
+    switch(selection){
+    case "dept_body":
+    $("#deptbody").show()
+    $("#hostel").hide()
+   	break;
+   	case "hostel_team":
+    $("#hostel").show()
+    $("#deptbody").hide()
+   	break;
+    default:
+    $("#hostel").hide()
+    $("#deptbody").hide()
+
+    }
+});
+</script>
 </html>

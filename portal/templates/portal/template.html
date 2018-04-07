@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--<link href="https://fonts.googleapis.com/css?family=Cormorant+Upright" rel="stylesheet">-->
+    <meta name="viewport" content="width=device-width" />
+    <style type="text/css">
+        body{
+            font-family: Geneva, Helvetica, sans-serif;
+            padding: 10px 10px;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        thead{
+            background-color: #424242;
+            color: #fff;
+        }
+         @font-face {
+            font-family: Cormorant;
+            src: url('/home/mukul/iitg_updated/portal/static/portal/CormorantInfant-Italic.ttf') format('truetype');
+        }
+
+        .title{
+            font-family: 'Cormorant', serif;
+            text-align: center;
+            font-size: 50px;
+        }
+        footer{
+            position: absolute;
+            bottom: 20px;
+           }
+
+
+    </style>
+
+</head>
+
+<body>
+    <!--<img src="http://127.0.0.1:8000/static/portal/header.png" width="1000px" height="auto">-->
+    <!--<div class="header">-->
+    	<!--<p>Guwahati - 781039, India<br>Phone: +91-361-2583000<br>+91-361-2583000<br><span>Assistant Registrar</span>Fax: +91-361-2690762<br><span>Students' Affairs</span>E-mail: hossa@iitg.ernet.in</p>-->
+    <!--</div>-->
+    <h1 class="title">Certificate of Recogniton<!-- /Accreditation/Commendation --></h1>
+    <p>This is to certify that <strong>{{ user }}</strong> with roll number <strong>{{ user.profile.roll_no }}</strong> occupied the below mentioned positions and performed in them to the best of his/her ability.</p> <table>
+       <thead>
+            <tr>
+                <th>Postion</th>
+                <th>Team / Event</th>
+                <th>Board</th>
+                <th>Tenure</th>
+            </tr>
+        </thead>
+         {% for x in post %}
+        <tbody>
+
+            <tr>
+                <td>{{ x.request_post }}</td>
+                <td>{{ x.request_event }}</td>
+                <td>{{ x.board }}</td>
+                <td>{{ x.request_year }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+</body>

@@ -13,17 +13,137 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
+
+
+/*upload button*/
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    margin-top: 10px;
+    max-width: 80%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 12px 30px;
+    border-radius: 3px;
+    /* 10px 20px */
+}
+
+.no-js .inputfile + label {
+    display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+
+
+/* style 1 */
+
+.inputfile-1 + label {
+    color: #f1e5e6;
+    background-color: #999999;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+    box-shadow: 0 14px 26px -12px rgba(153, 153, 153, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(153, 153, 153, 0.2);
+}
+
+
+
+
+
+ /*Badge styling*/
+ .badge-danger{
+    background-color: #F44336;
+ }
+ .badge{
+    margin-left: 3px;
+ }
+/*Icon sizing and colors*/
+.md-14 { font-size: 14px; }
+.md-18 { font-size: 18px; }
+.md-24 { font-size: 24px; }
+.md-36 { font-size: 36px; }
+.md-48 { font-size: 48px; }
+
+.orange600 { color: #FB8C00; }
+.green500 { color: #4CAF50; }
+.pink400 { color: #EC407A; }
+.blue500 { color: #2196F3; }
+.purple500 { color: #9C27B0; }
+.red500 { color: #F44336; }
+
+/*Profile page*/
+.profile{
+	margin: 10px 0 20px 0px;
+	text-align: left;
+	padding-left: 50px;
+}
+
+#profile_link{
+	padding: 9px 12px 9px 12px;
+	background-color: #eee
+}
+.profile button{
+	background: none;
+	border: none;
+	position: relative;
+	top: 5px;
+}
+
+/*Styles for the notification*/
+[data-notify="message"] {
+    display: inline !important;
+}
+[data-notify="dismiss"] {
+    position: static !important;
+    padding-left: 10px !important;
+}
+
+/*Navbar styles*/
 .sidebar .nav>li.active-pro {
     position: absolute;
     width: 100%;
-    bottom: 10px;
+    bottom: 120px;
 }
-
-.navbar-right{
+.navbar-absolute .navbar-right{
     padding: 15px 10px;
 }
-
-
 /* ANIMATION */
 
 
@@ -828,7 +948,7 @@ h2.title {
 .sidebar .logo .simple-text,
 .off-canvas-sidebar .logo .simple-text {
     text-transform: uppercase;
-    padding: 5px 0px;
+    padding: 20px 0 5px 0px;
     display: block;
     font-size: 18px;
     color: #3C4858;
@@ -2995,7 +3115,7 @@ label.control-label {
 
 .form-group {
     padding-bottom: 10px;
-    margin: 27px 0 0 0;
+    margin: 15px 0 0 0;
 }
 
 .form-group .form-control::-moz-placeholder {
@@ -3050,7 +3170,8 @@ label.control-label {
 
 .form-group.label-static label.control-label,
 .form-group.label-floating.is-focused label.control-label,
-.form-group.label-floating:not(.is-empty) label.control-label {
+.form-group.label-floating:not(.is-empty) label.control-label,
+.form-group.select-with-placeholder label.control-label {
     top: -28px;
     left: 0;
     font-size: 11px;
@@ -4887,9 +5008,9 @@ fieldset[disabled] .navbar .btn-link:focus {
 
 .popover,
 .tooltip-inner {
-    color: #555555;
+    color: #FFFFFF;
     line-height: 1.5em;
-    background: #FFFFFF;
+    background: #555555;
     border: none;
     border-radius: 3px;
     box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
@@ -4939,19 +5060,19 @@ fieldset[disabled] .navbar .btn-link:focus {
 }
 
 .tooltip.left .tooltip-arrow {
-    border-left-color: #FFFFFF;
+    border-left-color: #555555;
 }
 
 .tooltip.right .tooltip-arrow {
-    border-right-color: #FFFFFF;
+    border-right-color: #555555;
 }
 
 .tooltip.top .tooltip-arrow {
-    border-top-color: #FFFFFF;
+    border-top-color: #555555;
 }
 
 .tooltip.bottom .tooltip-arrow {
-    border-bottom-color: #FFFFFF;
+    border-bottom-color: #555555;
 }
 
 .tooltip-inner {
@@ -5471,7 +5592,7 @@ footer .btn {
     margin: -50px auto 0;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -10px 15px -15px rgba(0, 0, 0, 0.42)
 }
 
 .card-profile .card-avatar+.content,
