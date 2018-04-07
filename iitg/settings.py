@@ -25,9 +25,12 @@ SECRET_KEY = '&y1zacgz6s%pbsafkqx=_sdc+b)o@uxz#brrfbyaa!cm$30!4!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'
+]
 
 
+# TEMPLATE_DEBUG = DEBUG
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,7 +58,7 @@ ROOT_URLCONF = 'iitg.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,5 +120,22 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+PROJECT_ROOT = '/home/mukul/iitg_updated/portal/'
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT,'static-root')
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'portal/media/')
+
+
+WKHTMLTOPDF_CMD_OPTIONS = {
+'quiet': True,
+}
+
+if os.name != 'nt':
+    WKHTMLTOPDF_CMD = '/usr/bin/wkhtmltopdf'
+else:
+    WKHTMLTOPDF_DEBUG = True
+
+
